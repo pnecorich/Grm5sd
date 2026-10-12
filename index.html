@@ -27,6 +27,7 @@
       padding: 0;
       font-family: 'Fredoka', sans-serif;
       user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -132,6 +133,12 @@
     .cover-icon {
       font-size: 4rem;
       margin-bottom: 10px;
+      animation: bounceSoft 2s infinite ease-in-out;
+    }
+
+    @keyframes bounceSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
 
     .name-input-group {
@@ -155,7 +162,7 @@
       outline: none;
     }
 
-    /* VOCAB GRID (EXACTLY 6 PER PAGE) */
+    /* VOCAB GRID (INTERACTIVE & DYNAMIC MOTION) */
     .vocab-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -165,19 +172,37 @@
 
     .card {
       background: #FFF;
-      border: 2px solid #E2E8F0;
-      border-radius: 16px;
-      padding: 12px 8px;
+      border: 2.5px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 14px 10px;
       text-align: center;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
     }
 
-    .card i {
+    /* MOTION INTERAKTIF SAAT DISENTUH/DIKLIK */
+    .card:active, .card.clicked {
+      transform: scale(0.92) translateY(4px);
+      border-color: var(--secondary);
+      background: #E6FFFA;
+      box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+    }
+
+    .card .icon-wrapper {
       font-size: 2.2rem;
       color: var(--secondary);
       margin-bottom: 6px;
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .card .en { font-size: 0.95rem; font-weight: 700; }
+    .card:active .icon-wrapper, .card.clicked .icon-wrapper {
+      transform: scale(1.25) rotate(10deg);
+    }
+
+    .card .en { font-size: 0.95rem; font-weight: 700; color: var(--dark); }
     .card .id { font-size: 0.8rem; color: #718096; }
 
     /* INDONESIAN FRIENDLY GRAMMAR CARDS */
@@ -257,6 +282,11 @@
       font-size: 0.9rem;
       text-align: left;
       cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .opt-btn:active {
+      transform: scale(0.97);
     }
 
     .opt-btn.selected {
@@ -316,6 +346,11 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-nav:active {
+      transform: scale(0.95);
     }
 
     .btn-primary { background: var(--primary); color: #FFF; }
@@ -360,14 +395,14 @@
       <!-- PAGE 1: KOSAKATA 1 -->
       <div class="page" id="page-1">
         <h3 style="color: var(--primary);"><i class="fas fa-hat-cowboy"></i> Topi & Atasan</h3>
-        <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 1 dari 8 Materi</p>
+        <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 1 dari 8 Materi (Sentuh kartu!)</p>
         <div class="vocab-grid">
-          <div class="card"><i class="fas fa-hat-cowboy"></i><div class="en">Hat</div><div class="id">Topi</div></div>
-          <div class="card"><i class="fas fa-graduation-cap"></i><div class="en">Cap</div><div class="id">Topi Bisbol</div></div>
-          <div class="card"><i class="fas fa-hard-hat"></i><div class="en">Helmet</div><div class="id">Helm</div></div>
-          <div class="card"><i class="fas fa-user-tie"></i><div class="en">Shirt</div><div class="id">Kemeja</div></div>
-          <div class="card"><i class="fas fa-tshirt"></i><div class="en">T-Shirt</div><div class="id">Kaos</div></div>
-          <div class="card"><i class="fas fa-vest"></i><div class="en">Jacket</div><div class="id">Jaket</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper"><i class="fas fa-hat-cowboy"></i></div><div class="en">Hat</div><div class="id">Topi</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper"><i class="fas fa-graduation-cap"></i></div><div class="en">Cap</div><div class="id">Topi Bisbol</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper"><i class="fas fa-hard-hat"></i></div><div class="en">Helmet</div><div class="id">Helm</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper"><i class="fas fa-user-tie"></i></div><div class="en">Shirt</div><div class="id">Kemeja</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper"><i class="fas fa-tshirt"></i></div><div class="en">T-Shirt</div><div class="id">Kaos</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper"><i class="fas fa-vest"></i></div><div class="en">Jacket</div><div class="id">Jaket</div></div>
         </div>
         <div class="bottom-nav">
           <button class="btn-nav btn-primary" onclick="changePage(2)">Hal 2: Luaran & Celana <i class="fas fa-arrow-right"></i></button>
@@ -379,12 +414,12 @@
         <h3 style="color: var(--primary);"><i class="fas fa-mitten"></i> Luaran & Celana</h3>
         <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 2 dari 8 Materi</p>
         <div class="vocab-grid">
-          <div class="card"><i class="fas fa-user-ninja"></i><div class="en">Coat</div><div class="id">Mantel</div></div>
-          <div class="card"><i class="fas fa-mitten"></i><div class="en">Sweater</div><div class="id">Baju Hangat</div></div>
-          <div class="card"><div style="font-size:1.8rem;">🧥</div><div class="en">Hoodie</div><div class="id">Jaket Kupluk</div></div>
-          <div class="card"><div style="font-size:1.8rem;">👖</div><div class="en">Pants</div><div class="id">Celana Panjang</div></div>
-          <div class="card"><div style="font-size:1.8rem;">🩳</div><div class="en">Shorts</div><div class="id">Celana Pendek</div></div>
-          <div class="card"><div style="font-size:1.8rem;">👗</div><div class="en">Skirt / Dress</div><div class="id">Rok / Gaun</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper"><i class="fas fa-user-ninja"></i></div><div class="en">Coat</div><div class="id">Mantel</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper"><i class="fas fa-mitten"></i></div><div class="en">Sweater</div><div class="id">Baju Hangat</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">🧥</div><div class="en">Hoodie</div><div class="id">Jaket Kupluk</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">👖</div><div class="en">Pants</div><div class="id">Celana Panjang</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">🩳</div><div class="en">Shorts</div><div class="id">Celana Pendek</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">👗</div><div class="en">Skirt / Dress</div><div class="id">Rok / Gaun</div></div>
         </div>
         <div class="bottom-nav">
           <button class="btn-nav btn-secondary" onclick="changePage(1)"><i class="fas fa-arrow-left"></i> Hal 1</button>
@@ -397,12 +432,12 @@
         <h3 style="color: var(--primary);"><i class="fas fa-shoe-prints"></i> Sepatu & Aksesori</h3>
         <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 3 dari 8 Materi</p>
         <div class="vocab-grid">
-          <div class="card"><i class="fas fa-shoe-prints"></i><div class="en">Shoes</div><div class="id">Sepatu</div></div>
-          <div class="card"><i class="fas fa-socks"></i><div class="en">Socks</div><div class="id">Kaos Kaki</div></div>
-          <div class="card"><div style="font-size:1.8rem;">🥾</div><div class="en">Boots</div><div class="id">Sepatu Boot</div></div>
-          <div class="card"><div style="font-size:1.8rem;">👔</div><div class="en">Belt</div><div class="id">Ikat Pinggang</div></div>
-          <div class="card"><i class="fas fa-glasses"></i><div class="en">Glasses</div><div class="id">Kacamata</div></div>
-          <div class="card"><div style="font-size:1.8rem;">💍</div><div class="en">Ring / Watch</div><div class="id">Cincin / Jam</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper"><i class="fas fa-shoe-prints"></i></div><div class="en">Shoes</div><div class="id">Sepatu</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper"><i class="fas fa-socks"></i></div><div class="en">Socks</div><div class="id">Kaos Kaki</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">🥾</div><div class="en">Boots</div><div class="id">Sepatu Boot</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">👔</div><div class="en">Belt</div><div class="id">Ikat Pinggang</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper"><i class="fas fa-glasses"></i></div><div class="en">Glasses</div><div class="id">Kacamata</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">💍</div><div class="en">Ring / Watch</div><div class="id">Cincin / Jam</div></div>
         </div>
         <div class="bottom-nav">
           <button class="btn-nav btn-secondary" onclick="changePage(2)"><i class="fas fa-arrow-left"></i> Hal 2</button>
@@ -410,17 +445,17 @@
         </div>
       </div>
 
-      <!-- PAGE 4: KOSAKATA 4 (BARU) -->
+      <!-- PAGE 4: KOSAKATA 4 -->
       <div class="page" id="page-4">
         <h3 style="color: var(--primary);"><i class="fas fa-cloud-sun-rain"></i> Pakaian Musim & Acara</h3>
         <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 4 dari 8 Materi</p>
         <div class="vocab-grid">
-          <div class="card"><div style="font-size:1.8rem;">🌧️</div><div class="en">Raincoat</div><div class="id">Jas Hujan</div></div>
-          <div class="card"><div style="font-size:1.8rem;">🪔</div><div class="en">Pajamas</div><div class="id">Baju Tidur</div></div>
-          <div class="card"><div style="font-size:1.8rem;">🩱</div><div class="en">Swimsuit</div><div class="id">Baju Renang</div></div>
-          <div class="card"><div style="font-size:1.8rem;">🧣</div><div class="en">Scarf</div><div class="id">Syal / Selendang</div></div>
-          <div class="card"><div style="font-size:1.8rem;">🧤</div><div class="en">Gloves</div><div class="id">Sarung Tangan</div></div>
-          <div class="card"><div style="font-size:1.8rem;">👔</div><div class="en">Uniform</div><div class="id">Seragam</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">🌧️</div><div class="en">Raincoat</div><div class="id">Jas Hujan</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">🪔</div><div class="en">Pajamas</div><div class="id">Baju Tidur</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">🩱</div><div class="en">Swimsuit</div><div class="id">Baju Renang</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">🧣</div><div class="en">Scarf</div><div class="id">Syal / Selendang</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">🧤</div><div class="en">Gloves</div><div class="id">Sarung Tangan</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">👔</div><div class="en">Uniform</div><div class="id">Seragam</div></div>
         </div>
         <div class="bottom-nav">
           <button class="btn-nav btn-secondary" onclick="changePage(3)"><i class="fas fa-arrow-left"></i> Hal 3</button>
@@ -428,17 +463,18 @@
         </div>
       </div>
 
-      <!-- PAGE 5: KOSAKATA 5 (BARU) -->
+      <!-- PAGE 5: KOSAKATA 5 (TAS PUNGGUNG DIPERBAIKI) -->
       <div class="page" id="page-5">
         <h3 style="color: var(--primary);"><i class="fas fa-gem"></i> Perlengkapan & Perhiasan</h3>
         <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 5 dari 8 Materi</p>
         <div class="vocab-grid">
-          <div class="card"><i class="fas fa-backpack"></i><div class="en">Backpack</div><div class="id">Tas Punggung</div></div>
-          <div class="card"><i class="fas fa-umbrella"></i><div class="en">Umbrella</div><div class="id">Payung</div></div>
-          <div class="card"><div style="font-size:1.8rem;">🎀</div><div class="en">Hairband</div><div class="id">Bando / Pita</div></div>
-          <div class="card"><div style="font-size:1.8rem;">📿</div><div class="en">Necklace</div><div class="id">Kalung</div></div>
-          <div class="card"><div style="font-size:1.8rem;">⌚</div><div class="en">Bracelet</div><div class="id">Gelang</div></div>
-          <div class="card"><div style="font-size:1.8rem;">👛</div><div class="en">Wallet</div><div class="id">Dompet</div></div>
+          <!-- TAS PUNGGUNG MENGGUNAKAN EMOJI VEKTOR SEHINGGA PASTI TAMPIL -->
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">🎒</div><div class="en">Backpack</div><div class="id">Tas Punggung</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper"><i class="fas fa-umbrella"></i></div><div class="en">Umbrella</div><div class="id">Payung</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">🎀</div><div class="en">Hairband</div><div class="id">Bando / Pita</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">📿</div><div class="en">Necklace</div><div class="id">Kalung</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">⌚</div><div class="en">Bracelet</div><div class="id">Gelang</div></div>
+          <div class="card" onclick="triggerCardMotion(this)"><div class="icon-wrapper">👛</div><div class="en">Wallet</div><div class="id">Dompet</div></div>
         </div>
         <div class="bottom-nav">
           <button class="btn-nav btn-secondary" onclick="changePage(4)"><i class="fas fa-arrow-left"></i> Hal 4</button>
@@ -510,7 +546,7 @@
         </div>
       </div>
 
-      <!-- PAGE 8: RINGKASAN MENGGUNAKAN SIMBOL '=' -->
+      <!-- PAGE 8: RINGKASAN -->
       <div class="page" id="page-8">
         <h3 style="color: var(--primary); margin-bottom:5px;"><i class="fas fa-check-circle"></i> Ringkasan Siap Kuis</h3>
         <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 8 dari 8 Materi</p>
@@ -612,6 +648,13 @@
       const titles = ["Sampul", "Halaman 1/8 (Kosakata 1)", "Halaman 2/8 (Kosakata 2)", "Halaman 3/8 (Kosakata 3)", "Halaman 4/8 (Musim)", "Halaman 5/8 (Perlengkapan)", "Halaman 6/8 (Belajar To Be)", "Halaman 7/8 (Cerita)", "Halaman 8/8 (Ringkasan)", "Kuis Interaktif"];
       document.getElementById('pageTitle').innerText = titles[pageNum];
       document.getElementById('quizNavBtn').innerHTML = `<i class="fas fa-gamepad"></i> Ke Kuis`;
+    }
+
+    function triggerCardMotion(card) {
+      card.classList.add('clicked');
+      setTimeout(() => {
+        card.classList.remove('clicked');
+      }, 300);
     }
 
     function toggleQuizMode() {
