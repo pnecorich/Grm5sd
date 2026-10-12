@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>English Grade 5: Chapter 5 - I Am Wearing a Hat</title>
+
+  <!-- FAVICON SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧢</text></svg>">
+
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #FF6B6B;
+      --secondary: #4ECDC4;
+      --accent: #FFE66D;
+      --bg: #F0F4F8;
+      --dark: #2C3E50;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', sans-serif;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--dark);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      background: #FFFFFF;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 20px rgba(0,0,0,0.08);
+      position: relative;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(255,107,107,0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* TOP NAVIGATION FOR QUIZ & PAGES */
+    .top-quiz-nav {
+      background: #FFF;
+      padding: 10px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #EDF2F7;
+    }
+
+    .quiz-shortcut-btn {
+      background: var(--accent);
+      color: var(--dark);
+      border: none;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .page-indicator {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #718096;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page {
+      display: none;
+      animation: bookFlip 0.4s ease-out forwards;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes bookFlip {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* COVER PAGE */
+    .cover-container {
+      text-align: center;
+      padding: 25px 15px;
+      background: linear-gradient(135deg, #FFF5F5 0%, #E6FFFA 100%);
+      border-radius: 20px;
+      border: 3px dashed var(--primary);
+      margin-top: 10px;
+    }
+
+    .cover-icon {
+      font-size: 4rem;
+      margin-bottom: 10px;
+    }
+
+    .name-input-group {
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    .name-input-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .name-input-group input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #CBD5E0;
+      border-radius: 12px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    /* VOCAB GRID (EXACTLY 6 PER PAGE) */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .card {
+      background: #FFF;
+      border: 2px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+
+    .card i {
+      font-size: 2.2rem;
+      color: var(--secondary);
+      margin-bottom: 6px;
+    }
+
+    .card .en { font-size: 0.95rem; font-weight: 700; }
+    .card .id { font-size: 0.8rem; color: #718096; }
+
+    /* INDONESIAN FRIENDLY GRAMMAR CARDS */
+    .grammar-section {
+      background: #F7FAFC;
+      border-radius: 16px;
+      padding: 15px;
+      border: 2px solid #E2E8F0;
+    }
+
+    .to-be-card {
+      background: white;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      border-left: 5px solid var(--primary);
+    }
+
+    .to-be-card.is { border-left-color: #3182CE; }
+    .to-be-card.are { border-left-color: #38A169; }
+
+    .to-be-title {
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .to-be-desc {
+      font-size: 0.85rem;
+      color: #4A5568;
+      line-height: 1.4;
+    }
+
+    /* STORY & SUMMARY */
+    .story-box {
+      background: #FFFAF0;
+      border: 2px dashed #FBD38D;
+      border-radius: 16px;
+      padding: 15px;
+      line-height: 1.5;
+      font-size: 0.9rem;
+    }
+
+    /* QUIZ STYLES */
+    .quiz-card {
+      background: #FFF;
+      border-radius: 16px;
+      padding: 15px;
+      border: 2px solid #E2E8F0;
+    }
+
+    .question {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--dark);
+      min-height: 48px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .opt-btn {
+      padding: 12px;
+      border: 2px solid #CBD5E0;
+      border-radius: 10px;
+      background: #FFF;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .opt-btn.selected {
+      background: #E6FFFA;
+      border-color: var(--secondary);
+      color: #234E52;
+    }
+
+    .opt-btn.correct { background: #C6F6D5; border-color: #38A169; }
+    .opt-btn.wrong { background: #FED7D7; border-color: #E53E3E; }
+
+    .hint-btn {
+      background: #EBF8FF;
+      color: #2B6CB0;
+      border: 1px solid #BEE3F8;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .hint-box {
+      display: none;
+      background: #FFFFF0;
+      border: 1px solid #D69E2E;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: #744210;
+      margin-bottom: 12px;
+    }
+
+    /* FOOTER NAV BUTTONS */
+    .bottom-nav {
+      margin-top: auto;
+      padding-top: 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-nav {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-primary { background: var(--primary); color: #FFF; }
+    .btn-secondary { background: #EDF2F7; color: var(--dark); }
+    .btn-ok { background: #38A169; color: #FFF; width: 100%; margin-top: 5px; }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <header>
+      <h1>Grade 5: Chapter 5 - I Am Wearing a Hat</h1>
+    </header>
+
+    <!-- NAVIGATION BAR DENGAN TOMBOL KUIS & INTIP MATERI -->
+    <div class="top-quiz-nav" id="topNav" style="display: none;">
+      <span class="page-indicator" id="pageTitle">Halaman 1/8</span>
+      <button class="quiz-shortcut-btn" id="quizNavBtn" onclick="toggleQuizMode()">
+        <i class="fas fa-gamepad"></i> Ke Kuis
+      </button>
+    </div>
+
+    <main>
+      <!-- PAGE 0: COVER SAMPUL BUKU -->
+      <div class="page active" id="page-0">
+        <div class="cover-container">
+          <div class="cover-icon">🧢👗🎒</div>
+          <h2 style="color: var(--primary);">Buku Interaktif</h2>
+          <p style="font-size: 0.85rem; color: #718096; margin-top: 4px;">Bahasa Inggris Kelas 5 SD</p>
+          
+          <div class="name-input-group">
+            <label><i class="fas fa-user-edit"></i> Masukkan Nama Siswa:</label>
+            <input type="text" id="studentName" placeholder="Contoh: Putri Ramadhani">
+          </div>
+
+          <button class="btn-nav btn-primary" style="width: 100%; padding: 14px; font-size: 1rem;" onclick="openBook()">
+            <i class="fas fa-book-open"></i> Buka Buku Materi
+          </button>
+        </div>
+      </div>
+
+      <!-- PAGE 1: KOSAKATA 1 -->
+      <div class="page" id="page-1">
+        <h3 style="color: var(--primary);"><i class="fas fa-hat-cowboy"></i> Topi & Atasan</h3>
+        <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 1 dari 8 Materi</p>
+        <div class="vocab-grid">
+          <div class="card"><i class="fas fa-hat-cowboy"></i><div class="en">Hat</div><div class="id">Topi</div></div>
+          <div class="card"><i class="fas fa-graduation-cap"></i><div class="en">Cap</div><div class="id">Topi Bisbol</div></div>
+          <div class="card"><i class="fas fa-hard-hat"></i><div class="en">Helmet</div><div class="id">Helm</div></div>
+          <div class="card"><i class="fas fa-user-tie"></i><div class="en">Shirt</div><div class="id">Kemeja</div></div>
+          <div class="card"><i class="fas fa-tshirt"></i><div class="en">T-Shirt</div><div class="id">Kaos</div></div>
+          <div class="card"><i class="fas fa-vest"></i><div class="en">Jacket</div><div class="id">Jaket</div></div>
+        </div>
+        <div class="bottom-nav">
+          <button class="btn-nav btn-primary" onclick="changePage(2)">Hal 2: Luaran & Celana <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- PAGE 2: KOSAKATA 2 -->
+      <div class="page" id="page-2">
+        <h3 style="color: var(--primary);"><i class="fas fa-mitten"></i> Luaran & Celana</h3>
+        <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 2 dari 8 Materi</p>
+        <div class="vocab-grid">
+          <div class="card"><i class="fas fa-user-ninja"></i><div class="en">Coat</div><div class="id">Mantel</div></div>
+          <div class="card"><i class="fas fa-mitten"></i><div class="en">Sweater</div><div class="id">Baju Hangat</div></div>
+          <div class="card"><div style="font-size:1.8rem;">🧥</div><div class="en">Hoodie</div><div class="id">Jaket Kupluk</div></div>
+          <div class="card"><div style="font-size:1.8rem;">👖</div><div class="en">Pants</div><div class="id">Celana Panjang</div></div>
+          <div class="card"><div style="font-size:1.8rem;">🩳</div><div class="en">Shorts</div><div class="id">Celana Pendek</div></div>
+          <div class="card"><div style="font-size:1.8rem;">👗</div><div class="en">Skirt / Dress</div><div class="id">Rok / Gaun</div></div>
+        </div>
+        <div class="bottom-nav">
+          <button class="btn-nav btn-secondary" onclick="changePage(1)"><i class="fas fa-arrow-left"></i> Hal 1</button>
+          <button class="btn-nav btn-primary" onclick="changePage(3)">Hal 3: Sepatu & Aksesori <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- PAGE 3: KOSAKATA 3 -->
+      <div class="page" id="page-3">
+        <h3 style="color: var(--primary);"><i class="fas fa-shoe-prints"></i> Sepatu & Aksesori</h3>
+        <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 3 dari 8 Materi</p>
+        <div class="vocab-grid">
+          <div class="card"><i class="fas fa-shoe-prints"></i><div class="en">Shoes</div><div class="id">Sepatu</div></div>
+          <div class="card"><i class="fas fa-socks"></i><div class="en">Socks</div><div class="id">Kaos Kaki</div></div>
+          <div class="card"><div style="font-size:1.8rem;">🥾</div><div class="en">Boots</div><div class="id">Sepatu Boot</div></div>
+          <div class="card"><div style="font-size:1.8rem;">👔</div><div class="en">Belt</div><div class="id">Ikat Pinggang</div></div>
+          <div class="card"><i class="fas fa-glasses"></i><div class="en">Glasses</div><div class="id">Kacamata</div></div>
+          <div class="card"><div style="font-size:1.8rem;">💍</div><div class="en">Ring / Watch</div><div class="id">Cincin / Jam</div></div>
+        </div>
+        <div class="bottom-nav">
+          <button class="btn-nav btn-secondary" onclick="changePage(2)"><i class="fas fa-arrow-left"></i> Hal 2</button>
+          <button class="btn-nav btn-primary" onclick="changePage(4)">Hal 4: Pakaian Musim <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- PAGE 4: KOSAKATA 4 (BARU) -->
+      <div class="page" id="page-4">
+        <h3 style="color: var(--primary);"><i class="fas fa-cloud-sun-rain"></i> Pakaian Musim & Acara</h3>
+        <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 4 dari 8 Materi</p>
+        <div class="vocab-grid">
+          <div class="card"><div style="font-size:1.8rem;">🌧️</div><div class="en">Raincoat</div><div class="id">Jas Hujan</div></div>
+          <div class="card"><div style="font-size:1.8rem;">🪔</div><div class="en">Pajamas</div><div class="id">Baju Tidur</div></div>
+          <div class="card"><div style="font-size:1.8rem;">🩱</div><div class="en">Swimsuit</div><div class="id">Baju Renang</div></div>
+          <div class="card"><div style="font-size:1.8rem;">🧣</div><div class="en">Scarf</div><div class="id">Syal / Selendang</div></div>
+          <div class="card"><div style="font-size:1.8rem;">🧤</div><div class="en">Gloves</div><div class="id">Sarung Tangan</div></div>
+          <div class="card"><div style="font-size:1.8rem;">👔</div><div class="en">Uniform</div><div class="id">Seragam</div></div>
+        </div>
+        <div class="bottom-nav">
+          <button class="btn-nav btn-secondary" onclick="changePage(3)"><i class="fas fa-arrow-left"></i> Hal 3</button>
+          <button class="btn-nav btn-primary" onclick="changePage(5)">Hal 5: Perlengkapan <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- PAGE 5: KOSAKATA 5 (BARU) -->
+      <div class="page" id="page-5">
+        <h3 style="color: var(--primary);"><i class="fas fa-gem"></i> Perlengkapan & Perhiasan</h3>
+        <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 5 dari 8 Materi</p>
+        <div class="vocab-grid">
+          <div class="card"><i class="fas fa-backpack"></i><div class="en">Backpack</div><div class="id">Tas Punggung</div></div>
+          <div class="card"><i class="fas fa-umbrella"></i><div class="en">Umbrella</div><div class="id">Payung</div></div>
+          <div class="card"><div style="font-size:1.8rem;">🎀</div><div class="en">Hairband</div><div class="id">Bando / Pita</div></div>
+          <div class="card"><div style="font-size:1.8rem;">📿</div><div class="en">Necklace</div><div class="id">Kalung</div></div>
+          <div class="card"><div style="font-size:1.8rem;">⌚</div><div class="en">Bracelet</div><div class="id">Gelang</div></div>
+          <div class="card"><div style="font-size:1.8rem;">👛</div><div class="en">Wallet</div><div class="id">Dompet</div></div>
+        </div>
+        <div class="bottom-nav">
+          <button class="btn-nav btn-secondary" onclick="changePage(4)"><i class="fas fa-arrow-left"></i> Hal 4</button>
+          <button class="btn-nav btn-primary" onclick="changePage(6)">Hal 6: Belajar To Be <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- PAGE 6: PENJELASAN TO BE -->
+      <div class="page" id="page-6">
+        <h3 style="color: var(--primary); margin-bottom:5px;"><i class="fas fa-lightbulb"></i> Cara Memakai TO BE (Is, Am, Are)</h3>
+        <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 6 dari 8 Materi</p>
+
+        <div class="grammar-section">
+          <p style="font-size:0.85rem; margin-bottom:10px; line-height:1.4;">
+            Dalam Bahasa Inggris, saat mau bilang <b>"sedang memakai"</b>, gunakan <b>To Be</b> (am / is / are) sebelum kata <b>wearing</b>.
+          </p>
+
+          <div class="to-be-card">
+            <div class="to-be-title" style="color: var(--primary);"><i class="fas fa-user"></i> 1. Gunakan "AM"</div>
+            <div class="to-be-desc">
+              Khusus untuk <b>I</b> (Saya).<br>
+              📌 <i>Contoh:</i> <b>I am wearing</b> a hat. (Saya sedang memakai topi).
+            </div>
+          </div>
+
+          <div class="to-be-card is">
+            <div class="to-be-title" style="color: #2B6CB0;"><i class="fas fa-user-tag"></i> 2. Gunakan "IS"</div>
+            <div class="to-be-desc">
+              Untuk <b>1 orang</b> (She, He, Adara, Olivia).<br>
+              📌 <i>Contoh:</i> <b>Adara is wearing</b> a pink dress. (Adara sedang memakai gaun merah muda).
+            </div>
+          </div>
+
+          <div class="to-be-card are">
+            <div class="to-be-title" style="color: #2F855A;"><i class="fas fa-users"></i> 3. Gunakan "ARE"</div>
+            <div class="to-be-desc">
+              Untuk <b>banyak orang</b> (You, We, They, Adara & Olivia).<br>
+              📌 <i>Contoh:</i> <b>They are wearing</b> shoes. (Mereka sedang memakai sepatu).
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-nav">
+          <button class="btn-nav btn-secondary" onclick="changePage(5)"><i class="fas fa-arrow-left"></i> Hal 5</button>
+          <button class="btn-nav btn-primary" onclick="changePage(7)">Hal 7: Baca Cerita <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- PAGE 7: CERITA PENDEK -->
+      <div class="page" id="page-7">
+        <h3 style="color: var(--primary); margin-bottom:5px;"><i class="fas fa-book-reader"></i> Cerita Pendek (Short Story)</h3>
+        <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 7 dari 8 Materi</p>
+
+        <div class="story-box">
+          <div style="font-weight:700; color:#DD6B20; text-align:center; margin-bottom:8px;">📖 Adara and Olivia's Sunday Outfit</div>
+          <p>Today is Sunday. Adara is getting ready to go to the park with her sister, Olivia.</p>
+          <p style="margin-top:6px; color:#2B6CB0;"><i>(Hari ini hari Minggu. Adara bersiap pergi ke taman bersama saudaranya, Olivia.)</i></p>
+
+          <p style="margin-top:10px;">Adara <b>is wearing</b> a yellow T-shirt and a blue skirt. On her head, she <b>is wearing</b> a cute hairband.</p>
+          <p style="margin-top:6px; color:#2B6CB0;"><i>(Adara sedang memakai kaos kuning dan rok biru. Di kepalanya, dia memakai bando lucu.)</i></p>
+
+          <p style="margin-top:10px;">Olivia <b>is wearing</b> a beautiful pink dress and white shoes. They <b>are carrying</b> colorful backpacks!</p>
+          <p style="margin-top:6px; color:#2B6CB0;"><i>(Olivia sedang memakai gaun merah muda dan sepatu putih. Mereka membawa tas punggung berwarna-warni!)</i></p>
+        </div>
+
+        <div class="bottom-nav">
+          <button class="btn-nav btn-secondary" onclick="changePage(6)"><i class="fas fa-arrow-left"></i> Hal 6</button>
+          <button class="btn-nav btn-primary" onclick="changePage(8)">Hal 8: Ringkasan <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- PAGE 8: RINGKASAN MENGGUNAKAN SIMBOL '=' -->
+      <div class="page" id="page-8">
+        <h3 style="color: var(--primary); margin-bottom:5px;"><i class="fas fa-check-circle"></i> Ringkasan Siap Kuis</h3>
+        <p style="font-size:0.8rem; color:#718096; margin-bottom:10px;">Halaman 8 dari 8 Materi</p>
+
+        <div class="grammar-section" style="background:#E6FFFA; border-color:#38A169;">
+          <h4 style="color:#234E52; margin-bottom:8px;">🎯 Rumus Mudah To Be:</h4>
+          <ul style="font-size:0.85rem; padding-left:18px; line-height:1.6; color:#2C7A7B; list-style:none;">
+            <li>🔹 <b>I</b> = am</li>
+            <li>🔹 <b>She / He / 1 Nama (Adara / Olivia)</b> = is</li>
+            <li>🔹 <b>They / We / You / >1 Nama (Adara & Olivia)</b> = are</li>
+          </ul>
+
+          <p style="font-size:0.8rem; margin-top:10px; color:#234E52;">
+            Tekan <b>💡 Butuh Hint?</b> di bawah jawaban jika memerlukan petunjuk saat kuis!
+          </p>
+        </div>
+
+        <div class="bottom-nav">
+          <button class="btn-nav btn-secondary" onclick="changePage(7)"><i class="fas fa-arrow-left"></i> Hal 7</button>
+          <button class="btn-nav btn-primary" onclick="startQuizMode()">Mulai Kuis 20 Soal <i class="fas fa-play"></i></button>
+        </div>
+      </div>
+
+      <!-- PAGE 9: KUIS INTERAKTIF 20 SOAL -->
+      <div class="page" id="page-9">
+        <div class="quiz-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-size:0.85rem; font-weight:700; color:var(--primary);" id="quizProgressText">Soal 1 / 20</span>
+          </div>
+
+          <div class="question" id="quizQuestion">Loading Soal...</div>
+          
+          <div class="options" id="quizOptions"></div>
+
+          <!-- TOMBOL HINT DIBAWAH PILIHAN JAWABAN -->
+          <button class="hint-btn" onclick="toggleHint()"><i class="fas fa-lightbulb"></i> Butuh Hint?</button>
+
+          <div class="hint-box" id="hintBox">
+            <div id="hintEn" style="font-weight:700; margin-bottom:2px;"></div>
+            <div id="hintId" style="font-style:italic;"></div>
+          </div>
+
+          <button class="btn-nav btn-ok" id="confirmBtn" onclick="confirmAnswer()" style="display:none;">
+            <i class="fas fa-check-circle"></i> Yakin & Kunci Jawaban
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    let studentName = "";
+    let lastActivePage = 1;
+    let currentQuizIndex = 0;
+    let selectedOptionIndex = null;
+    let score = 0;
+    let inQuizMode = false;
+
+    const quizData = [
+      { q: "1. What do you wear on your head when riding a motorcycle?", opts: ["Shoes", "Helmet", "Socks", "Jacket"], ans: 1, hintEn: "Protects your head on a bike.", hintId: "Pelindung kepala saat naik motor." },
+      { q: '2. Complete: "I ___ wearing a green jacket."', opts: ["am", "is", "are", "be"], ans: 0, hintEn: "Used exclusively for 'I'.", hintId: "Pasangan wajib khusus untuk subjek 'I'." },
+      { q: '3. Complete: "Adara and Olivia ___ wearing shoes."', opts: ["am", "is", "are", "be"], ans: 2, hintEn: "Two people (plural subject).", hintId: "Subjek ada 2 orang (Adara & Olivia) = jamak." },
+      { q: '4. "Olivia is wearing a pink dress." Apa arti dress?', opts: ["Topi", "Jaket", "Gaun", "Kaos kaki"], ans: 2, hintEn: "A one-piece outfit for girls.", hintId: "Pakaian terusan indah untuk anak perempuan." },
+      { q: "5. What do you wear on your back to carry books to school?", opts: ["Hat", "Backpack", "Shoes", "Helmet"], ans: 1, hintEn: "Carried on your back.", hintId: "Tas yang digendong di punggung." },
+      { q: '6. Complete: "Adara ___ wearing a cute hairband."', opts: ["am", "is", "are", "be"], ans: 1, hintEn: "Adara is one person (singular).", hintId: "Adara adalah 1 orang (subjek tunggal)." },
+      { q: '7. What do you use when it rains to stay dry?', opts: ["Umbrella", "Shorts", "Skirt", "Socks"], ans: 0, hintEn: "Opened above your head when raining.", hintId: "Payung untuk melindungi dari hujan." },
+      { q: '8. Complete: "They ___ carrying colorful backpacks."', opts: ["am", "is", "are", "be"], ans: 2, hintEn: "They means 'Mereka'.", hintId: "'They' (mereka) adalah subjek jamak." },
+      { q: "9. Apa Bahasa Inggris dari 'Jas Hujan'?", opts: ["Glasses", "Raincoat", "Ring", "Boots"], ans: 1, hintEn: "A coat worn in the rain.", hintId: "Baju luaran anti air saat hujan." },
+      { q: '10. Complete: "Olivia ___ wearing white shoes."', opts: ["am", "is", "are", "be"], ans: 1, hintEn: "Olivia is one person.", hintId: "Olivia adalah 1 orang." },
+      { q: '11. Apa yang biasa dipakai anak perempuan di rambutnya?', opts: ["Shoes", "Pants", "Hairband", "Socks"], ans: 2, hintEn: "Worn on the hair.", hintId: "Bando atau pita rambut." },
+      { q: '12. Apa arti dari kata "Pajamas"?', opts: ["Sepatu", "Baju Tidur", "Topi", "Jas Hujan"], ans: 1, hintEn: "Worn when sleeping.", hintId: "Pakaian nyaman untuk tidur." },
+      { q: '13. Complete: "We ___ wearing matching uniforms."', opts: ["am", "is", "are", "be"], ans: 2, hintEn: "We = Kami / Kita.", hintId: "'We' (kami/kita) menggunakan To Be jamak ini." },
+      { q: '14. What do you wear on your eyes to protect from sunlight?', opts: ["Shoes", "Sunglasses", "Belt", "Socks"], ans: 1, hintEn: "Worn on the eyes.", hintId: "Kacamata hitam penutup mata dari silau matahari." },
+      { q: '15. "Uniform" dalam Bahasa Indonesia artinya...', opts: ["Kemeja", "Seragam", "Celana", "Sepatu"], ans: 1, hintEn: "Worn at school.", hintId: "Pakaian sama yang dipakai anak saat sekolah." },
+      { q: '16. Complete: "I ___ wearing a yellow swimsuit at the pool."', opts: ["am", "is", "are", "be"], ans: 0, hintEn: "Always paired with 'I'.", hintId: "To Be wajib untuk 'I'." },
+      { q: '17. Baju renang dalam Bahasa Inggris dinamakan...', opts: ["Swimsuit", "Raincoat", "Coat", "Pajamas"], ans: 0, hintEn: "Worn for swimming.", hintId: "Pakaian khusus untuk berenang." },
+      { q: '18. Complete: "Adara and her mother ___ wearing scarves."', opts: ["am", "is", "are", "be"], ans: 2, hintEn: "More than one person.", hintId: "Lebih dari 1 orang (Adara & Ibunya)." },
+      { q: '19. Apa yang kita pakai di leher saat udara dingin?', opts: ["Hat", "Scarf", "Shoes", "Belt"], ans: 1, hintEn: "Worn around the neck.", hintId: "Syal pelindung leher dari dingin." },
+      { q: '20. Apa Bahasa Inggris dari "Kaos Kaki"?', opts: ["Shoes", "Socks", "Boots", "Gloves"], ans: 1, hintEn: "Worn inside shoes.", hintId: "Kain pelindung kaki di dalam sepatu." }
+    ];
+
+    function openBook() {
+      const input = document.getElementById('studentName').value.trim();
+      if (!input) {
+        alert("Mohon isi nama siswa terlebih dahulu agar nilai tersimpan!");
+        return;
+      }
+      studentName = input;
+      document.getElementById('topNav').style.display = 'flex';
+      changePage(1);
+    }
+
+    function changePage(pageNum) {
+      lastActivePage = pageNum;
+      inQuizMode = false;
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(`page-${pageNum}`).classList.add('active');
+
+      const titles = ["Sampul", "Halaman 1/8 (Kosakata 1)", "Halaman 2/8 (Kosakata 2)", "Halaman 3/8 (Kosakata 3)", "Halaman 4/8 (Musim)", "Halaman 5/8 (Perlengkapan)", "Halaman 6/8 (Belajar To Be)", "Halaman 7/8 (Cerita)", "Halaman 8/8 (Ringkasan)", "Kuis Interaktif"];
+      document.getElementById('pageTitle').innerText = titles[pageNum];
+      document.getElementById('quizNavBtn').innerHTML = `<i class="fas fa-gamepad"></i> Ke Kuis`;
+    }
+
+    function toggleQuizMode() {
+      if (inQuizMode) {
+        changePage(lastActivePage);
+      } else {
+        startQuizMode();
+      }
+    }
+
+    function startQuizMode() {
+      inQuizMode = true;
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-9').classList.add('active');
+      document.getElementById('pageTitle').innerText = "Kuis 20 Soal";
+      document.getElementById('quizNavBtn').innerHTML = `<i class="fas fa-book-open"></i> Intip Materi`;
+      loadQuiz();
+    }
+
+    function loadQuiz() {
+      document.getElementById('hintBox').style.display = 'none';
+      document.getElementById('confirmBtn').style.display = 'none';
+      selectedOptionIndex = null;
+
+      if (currentQuizIndex >= quizData.length) {
+        document.getElementById('quizProgressText').innerText = "Selesai!";
+        document.getElementById('quizQuestion').innerText = `🎉 Kuis Selesai!\nSiswa: ${studentName}\nSkor Akhir: ${score} / 100`;
+        document.getElementById('quizOptions').innerHTML = `<button class="btn-nav btn-primary" onclick="location.reload()">Ulangi dari Awal</button>`;
+        return;
+      }
+
+      const q = quizData[currentQuizIndex];
+      document.getElementById('quizProgressText').innerText = `Soal ${currentQuizIndex + 1} / ${quizData.length}`;
+      document.getElementById('quizQuestion').innerText = q.q;
+      document.getElementById('hintEn').innerText = `EN: ${q.hintEn}`;
+      document.getElementById('hintId').innerText = `ID: ${q.hintId}`;
+
+      const optsContainer = document.getElementById('quizOptions');
+      optsContainer.innerHTML = '';
+
+      q.opts.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => selectOption(btn, idx);
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    function selectOption(btn, idx) {
+      document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedOptionIndex = idx;
+      document.getElementById('confirmBtn').style.display = 'flex';
+    }
+
+    function toggleHint() {
+      const hb = document.getElementById('hintBox');
+      hb.style.display = hb.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function confirmAnswer() {
+      if (selectedOptionIndex === null) return;
+
+      const q = quizData[currentQuizIndex];
+      const allBtns = document.querySelectorAll('.opt-btn');
+      allBtns.forEach(b => b.disabled = true);
+
+      if (selectedOptionIndex === q.ans) {
+        allBtns[selectedOptionIndex].classList.add('correct');
+        score += 5; // Total 20 Soal * 5 = 100
+      } else {
+        allBtns[selectedOptionIndex].classList.add('wrong');
+        allBtns[q.ans].classList.add('correct');
+      }
+
+      document.getElementById('confirmBtn').style.display = 'none';
+
+      setTimeout(() => {
+        currentQuizIndex++;
+        loadQuiz();
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
