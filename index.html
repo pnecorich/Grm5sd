@@ -3,24 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ruang Belajar Interaktif</title>
+  <title>Pembelajaran Kelas 5 SD</title>
   
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
-      --bg: #FAFAFC;
+      --bg: #F8FAFC;
       --surface: #FFFFFF;
-      --text-main: #1E293B;
+      --text-main: #0F172A;
       --text-sub: #64748B;
-      --primary: #4F46E5;
-      --primary-light: #EEF2FF;
-      --accent-orange: #F97316;
-      --accent-green: #10B981;
-      --accent-blue: #06B6D4;
+      --primary: #4338CA;
       --border: #E2E8F0;
-      --radius: 20px;
+      --radius: 16px;
     }
 
     * {
@@ -37,415 +33,205 @@
       display: flex;
       justify-content: center;
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
     .app-container {
       width: 100%;
       max-width: 480px;
-      background: var(--bg);
-      min-height: 100vh;
-      padding-bottom: 40px;
+      padding: 24px 20px;
       display: flex;
       flex-direction: column;
+      gap: 20px;
     }
 
     /* HEADER */
     header {
-      padding: 24px 20px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      margin-bottom: 8px;
     }
 
-    .user-greeting h1 {
-      font-size: 1.35rem;
+    header h1 {
+      font-size: 1.4rem;
       font-weight: 800;
       color: var(--text-main);
       letter-spacing: -0.02em;
     }
 
-    .user-greeting p {
+    header p {
       font-size: 0.85rem;
       color: var(--text-sub);
-      margin-top: 2px;
+      margin-top: 4px;
     }
 
-    .profile-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #6366F1, #8B5CF6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
-    }
-
-    /* BANNER SLIDER / PROMO */
-    .hero-card {
-      margin: 0 20px 24px;
-      background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
-      border-radius: var(--radius);
-      padding: 20px;
-      color: white;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.3);
-    }
-
-    .hero-card::after {
-      content: '🚀';
-      position: absolute;
-      right: -10px;
-      bottom: -10px;
-      font-size: 5rem;
-      opacity: 0.25;
-      transform: rotate(-15deg);
-    }
-
-    .hero-badge {
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(8px);
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      display: inline-block;
-      margin-bottom: 10px;
-    }
-
-    .hero-card h2 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-      line-height: 1.3;
-    }
-
-    .hero-card p {
-      font-size: 0.8rem;
-      opacity: 0.9;
-    }
-
-    /* SECTION TITLE */
-    .section-header {
-      padding: 0 20px 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .section-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    .section-sub {
-      font-size: 0.75rem;
-      color: var(--text-sub);
-    }
-
-    /* HORIZONTAL SLIDER - JENJANG KELAS */
-    .slider-container {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding: 4px 20px 16px;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-    }
-
-    .slider-container::-webkit-scrollbar {
-      display: none;
-    }
-
-    .chip-item {
-      scroll-snap-align: start;
-      flex: 0 0 auto;
-      padding: 10px 18px;
+    /* FOLDER MATA PELAJARAN */
+    .subject-folder {
       background: var(--surface);
       border: 1.5px solid var(--border);
-      border-radius: 30px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-sub);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .chip-item.active {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
-    }
-
-    /* CARD CAROUSEL SLIDER - MATA PELAJARAN */
-    .cards-slider {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      padding: 4px 20px 24px;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-    }
-
-    .cards-slider::-webkit-scrollbar {
-      display: none;
-    }
-
-    .subject-card {
-      scroll-snap-align: start;
-      flex: 0 0 240px;
-      background: var(--surface);
       border-radius: var(--radius);
-      padding: 18px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: all 0.2s ease;
+    }
+
+    .folder-header {
+      padding: 18px 20px;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: space-between;
-      transition: transform 0.2s ease;
+      cursor: pointer;
+      user-select: none;
     }
 
-    .subject-card:active {
-      transform: scale(0.97);
+    .folder-header:active {
+      background: #F1F5F9;
     }
 
-    .subject-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 12px;
-    }
-
-    .bg-inggris { background: #EEF2FF; color: #4F46E5; }
-    .bg-mtk { background: #FFF7ED; color: #EA580C; }
-    .bg-ipas { background: #ECFDF5; color: #059669; }
-
-    .subject-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
-
-    .subject-card p {
-      font-size: 0.78rem;
-      color: var(--text-sub);
-      margin-bottom: 16px;
-    }
-
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 12px;
-      border-top: 1px dashed var(--border);
-    }
-
-    .chapter-count {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-sub);
-    }
-
-    .btn-arrow {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-main);
-      font-size: 0.85rem;
-    }
-
-    /* VERTICAL LIST FOR CHAPTERS / RECENT */
-    .chapter-list {
-      padding: 0 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .chapter-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px 16px;
+    .folder-title {
       display: flex;
       align-items: center;
       gap: 14px;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.2s ease;
     }
 
-    .chapter-card:active {
-      transform: translateY(2px);
-      background: #F8FAFC;
+    .folder-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #EEF2FF;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
     }
 
-    .chapter-icon {
-      font-size: 1.8rem;
-    }
-
-    .chapter-info {
-      flex: 1;
-    }
-
-    .chapter-info h4 {
-      font-size: 0.9rem;
+    .folder-title h3 {
+      font-size: 1.05rem;
       font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 2px;
     }
 
-    .chapter-info p {
+    .folder-title p {
+      font-size: 0.78rem;
+      color: var(--text-sub);
+    }
+
+    .toggle-icon {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      transition: transform 0.25s ease;
+    }
+
+    /* ISI BAB / CHAPTER (HIDDEN DEFAULT) */
+    .folder-content {
+      display: none;
+      border-top: 1px solid var(--border);
+      background: #FAFAFC;
+      padding: 12px 16px;
+    }
+
+    .subject-folder.open .folder-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .subject-folder.open .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    /* ITEM BAB */
+    .chapter-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: background 0.15s ease;
+    }
+
+    .chapter-item:active {
+      background: #EEF2FF;
+      border-color: var(--primary);
+    }
+
+    .chapter-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chapter-emoji {
+      font-size: 1.3rem;
+    }
+
+    .chapter-text h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .chapter-text p {
       font-size: 0.75rem;
       color: var(--text-sub);
     }
 
-    .badge-status {
-      font-size: 0.7rem;
+    .btn-open {
+      font-size: 0.75rem;
       font-weight: 700;
-      padding: 4px 10px;
+      color: var(--primary);
+      background: #EEF2FF;
+      padding: 6px 12px;
       border-radius: 20px;
-      background: #ECFDF5;
-      color: #059669;
-    }
-
-    .badge-lock {
-      background: #F1F5F9;
-      color: #94A3B8;
     }
   </style>
 </head>
 <body>
 
   <div class="app-container">
-    <!-- HEADER -->
     <header>
-      <div class="user-greeting">
-        <h1>Ruang Belajar 📚</h1>
-        <p>Pilih kelas & materi favoritmu</p>
-      </div>
-      <div class="profile-avatar">
-        <i class="fas fa-child"></i>
-      </div>
+      <h1>Materi Kelas 5 SD 📁</h1>
+      <p>Pilih mata pelajaran untuk melihat bab</p>
     </header>
 
-    <!-- HERO BANNER -->
-    <div class="hero-card">
-      <span class="hero-badge">Selamat Datang</span>
-      <h2>Siap Belajar Hari Ini?</h2>
-      <p>Materi interaktif & kuis seru menanti kamu!</p>
-    </div>
-
-    <!-- SLIDER 1: PILIH KELAS (CHIPS HORISONTAL) -->
-    <div class="section-header">
-      <span class="section-title">Pilih Kelas</span>
-      <span class="section-sub">Geser kesamping ➔</span>
-    </div>
-
-    <div class="slider-container">
-      <div class="chip-item active"><i class="fas fa-graduation-cap"></i> Kelas 5 SD</div>
-      <div class="chip-item"><i class="fas fa-graduation-cap"></i> Kelas 6 SD</div>
-      <div class="chip-item"><i class="fas fa-school"></i> Kelas 4 SD</div>
-    </div>
-
-    <!-- SLIDER 2: CAROUSEL MATA PELAJARAN -->
-    <div class="section-header" style="margin-top: 10px;">
-      <span class="section-title">Mata Pelajaran</span>
-      <span class="section-sub">Geser kartu ➔</span>
-    </div>
-
-    <div class="cards-slider">
-      <!-- B. INGGRIS -->
-      <div class="subject-card">
-        <div>
-          <div class="subject-icon bg-inggris">
+    <!-- FOLDER 1: BAHASA INGGRIS -->
+    <div class="subject-folder" id="folder-inggris">
+      <div class="folder-header" onclick="toggleFolder('folder-inggris')">
+        <div class="folder-title">
+          <div class="folder-icon">
             <i class="fas fa-language"></i>
           </div>
-          <h3>Bahasa Inggris</h3>
-          <p>Grammar, Vocabulary, & Quiz Interaktif</p>
-        </div>
-        <div class="card-footer">
-          <span class="chapter-count">2 Chapter</span>
-          <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
-        </div>
-      </div>
-
-      <!-- MATEMATIKA -->
-      <div class="subject-card">
-        <div>
-          <div class="subject-icon bg-mtk">
-            <i class="fas fa-calculator"></i>
+          <div>
+            <h3>Bahasa Inggris</h3>
+            <p>1 Bab Tersedia</p>
           </div>
-          <h3>Matematika</h3>
-          <p>Pecahan, Bangun Datar, & Berhitung</p>
         </div>
-        <div class="card-footer">
-          <span class="chapter-count">Segera Hadir</span>
-          <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
-        </div>
+        <i class="fas fa-chevron-down toggle-icon"></i>
       </div>
 
-      <!-- IPAS -->
-      <div class="subject-card">
-        <div>
-          <div class="subject-icon bg-ipas">
-            <i class="fas fa-leaf"></i>
+      <div class="folder-content">
+        <!-- BAB 5 (Materi & Kuis) -->
+        <a href="chapter-5.html" class="chapter-item">
+          <div class="chapter-left">
+            <span class="chapter-emoji">🧢</span>
+            <div class="chapter-text">
+              <h4>Chapter 5: I Am Wearing a Hat</h4>
+              <p>Materi & Kuis 20 Soal</p>
+            </div>
           </div>
-          <h3>IPAS</h3>
-          <p>Ekosistem, Organ Tubuh, & Alam</p>
-        </div>
-        <div class="card-footer">
-          <span class="chapter-count">Segera Hadir</span>
-          <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
-        </div>
+          <span class="btn-open">Buka</span>
+        </a>
       </div>
     </div>
 
-    <!-- LIST CHAPTER BAHASA INGGRIS KELAS 5 -->
-    <div class="section-header">
-      <span class="section-title">Daftar Bab / Chapter</span>
-    </div>
-
-    <div class="chapter-list">
-      <!-- CHAPTER 5 (KONEK KE HTML B.INGGRIS KAMU) -->
-      <a href="chapter-5.html" class="chapter-card">
-        <div class="chapter-icon">🧢</div>
-        <div class="chapter-info">
-          <h4>Chapter 5: I Am Wearing a Hat</h4>
-          <p>Bahasa Inggris • Kelas 5 SD</p>
-        </div>
-        <span class="badge-status">Mulai</span>
-      </a>
-
-      <!-- CHAPTER 6 (DUMMY UNTUK MATERI BERIKUTNYA) -->
-      <a href="#" class="chapter-card">
-        <div class="chapter-icon">🏡</div>
-        <div class="chapter-info">
-          <h4>Chapter 6: My House & Rooms</h4>
-          <p>Bahasa Inggris • Kelas 5 SD</p>
-        </div>
-        <span class="badge-status badge-lock">Nanti</span>
-      </a>
-    </div>
   </div>
+
+  <script>
+    function toggleFolder(id) {
+      const folder = document.getElementById(id);
+      folder.classList.toggle('open');
+    }
+  </script>
 
 </body>
 </html>
